@@ -1,11 +1,15 @@
 import Discord, { GuildMember, PartialGuildMember } from "discord.js";
+interface converterOptions {
+    bank?: number;
+    balance?: number;
+}
 declare class converter {
     text: string;
+    balance: number;
+    bank: number;
     private variables;
-    constructor(text: string);
-    getVariables(): {
-        "variables-list": string[];
-    };
+    constructor(text: string, options: converterOptions);
+    getVariables(): string[];
     parseOnJoin(member: Discord.GuildMember): string;
     parseOnMessage(message: Discord.Message<boolean>): string;
     parseOnMemberRemove(member: GuildMember | PartialGuildMember): this;
