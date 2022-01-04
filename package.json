@@ -1,0 +1,24 @@
+{
+  "name": "discordjs-variables",
+  "version": "1.0.0",
+  "description": "allow You to use variables like this {user_tag} in Discord channels",
+  "main": "index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "discord.js": "^13.5.0"
+  },
+  "dependencies": {
+    "moment": "^2.29.1"
+  },
+  "keywords": [
+    "discord variables",
+    "discord variable parser",
+    "discordjs",
+    "discord.js variables"
+  ]
+}
