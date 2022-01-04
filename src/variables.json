@@ -13,6 +13,9 @@
         "{server_id}",
         "{server_owner}",
         "{server_owner_id}",
-        "{server_memberCount}"
-    ]
+        "{server_memberCount}",
+        "{user_bal}",
+        "{user_bank}"
+    ],
+    "list": []
 }

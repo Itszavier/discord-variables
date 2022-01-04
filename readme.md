@@ -49,4 +49,15 @@ client.login("your token")
 | {server_owner} | `@mention` the server owner                              |
 |server_owner_id} |  the server owner id 
 |{server_memberCount} | the amount of members in the server  |
--------------------------------------------more coming soon--------------------------------
+|{channel_id}    | return the channel id this only works on ` parseOnMessage`|
+
+# functions
+
+
+|           Title              |                Description               |
+|------------------------------|------------------------------------------|
+|      ` converter `           |The conveter class take string and a Option parameters|
+| `parseOnJoin()` | Parse text in the `guildMemberAdd` Event and need the member parameter __in order to work__|
+| `parseOnMessage` | Parse text in the `messageCreate` Event and need the message parameter __in order to work__|
+| `parseOnMemberRemove` | Parse text in the `guildMemberRemove` Event and need the member parameter __in order to work__| 
+| `getVariables`  | return a string array of all the variables            |

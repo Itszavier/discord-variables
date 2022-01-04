@@ -2,19 +2,27 @@ import Discord, { GuildMember, PartialGuildMember } from "discord.js"
 import moment from "moment"
 import variables from '../src/variables.json'
 
-
+interface converterOptions {
+    bank?: number,
+    balance?: number,
+}
 
 class converter {
     public text: string;
+    public balance: number = 0
+    public bank: number = 0
     private variables: string[] = variables["variables-list"]
 
-    constructor(text: string) {
+    constructor(text: string, options: converterOptions) {
         this.text = text;
+        this.balance = options.balance || 0
+        this.bank = options.balance || 0
     }
 
     getVariables() {
-        return variables
+        return this.variables
     }
+
 
     parseOnJoin(member: Discord.GuildMember): string {
         if (!member) { new Error("GuildMember Object is missing") }
@@ -33,6 +41,9 @@ class converter {
             .replace(new RegExp("{server_owner}", "gm"), `<@!${member.guild?.ownerId}> `)
             .replace(new RegExp("{server_owner_id}", "gm"), member.guild.id)
             .replace(new RegExp("{server_memberCount}", "gm"), `${member.guild?.memberCount}`)
+            .replace(new RegExp("{user_bal}", "gm"), this.balance.toString())
+            .replace(new RegExp("{user_bank}", "gm"), this.bank.toString())
+
 
         return this.text
     }
@@ -55,6 +66,10 @@ class converter {
             .replace(new RegExp("{server_owner}", "gm"), `<@!${message.guild?.ownerId}> `)
             .replace(new RegExp("{server_owner_id}", "gm"), message.guild?.id as string)
             .replace(new RegExp("{server_memberCount}", "gm"), `${message.guild?.memberCount}`)
+            .replace(new RegExp("{channel_id}", "gm"), message.channelId)
+            .replace(new RegExp("{user_bal}", "gm"), this.balance.toString())
+            .replace(new RegExp("{user_bank}", "gm"), this.bank.toString())
+
         return this.text
     }
 
@@ -75,11 +90,15 @@ class converter {
             .replace(new RegExp("{server_owner}", "gm"), `<@!${member.guild?.ownerId}> `)
             .replace(new RegExp("{server_owner_id}", "gm"), member.guild.id)
             .replace(new RegExp("{server_memberCount}", "gm"), `${member.guild?.memberCount}`)
+            .replace(new RegExp("{user_bal}", "gm"), this.balance.toString())
+            .replace(new RegExp("{user_bank}", "gm"), this.bank.toString())
         return this
     }
 
 
 }
+
+
 
 
 
