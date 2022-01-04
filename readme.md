@@ -47,6 +47,6 @@ client.login("your token")
 | {server_icon}  | placeholder for the server icon returns the server icon|
 | {server_id}    | the server id                                          |
 | {server_owner} | `@mention` the server owner                              |
-| server_owner_id} |  the server owner id 
-
+|server_owner_id} |  the server owner id 
+|{server_memberCount} | the amount of members in the server  |
 -------------------------------------------more coming soon--------------------------------

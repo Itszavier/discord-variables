@@ -1,0 +1,18 @@
+{
+    "variables-list": [
+        "{user}",
+        "{username}",
+        "{user_tag}",
+        "{user_discrim}",
+        "{user_id}",
+        "{user_avatar}",
+        "{user_nick}",
+        "{user_createdAt}",
+        "{user_joinAt}",
+        "{server_icon}",
+        "{server_id}",
+        "{server_owner}",
+        "{server_owner_id}",
+        "{server_memberCount}"
+    ]
+}
