@@ -2,7 +2,7 @@
   "name": "discordjs-variables",
   "version": "1.0.0",
   "description": "allow You to use variables like this {user_tag} in Discord channels",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
