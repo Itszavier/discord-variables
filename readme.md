@@ -41,6 +41,8 @@ client.on("messageCreate", message => {
 |{server_memberCount} | the amount of members in the server  |
 |{channel_id}    | return the channel id this only works on ` parseOnMessage`|
 | {server_name} | return the server name  |
+| {user_bal}    | return the user balance |
+| {user_bank}   | return the user bank |
 
 # methods
 
@@ -55,6 +57,6 @@ client.on("messageCreate", message => {
 
 ## converter class Options
 
-> the `converter class` option object, The object allow to set bank and balance value to whatever You want and which will allow You to use `{user_bal}` and `{user_bank}` example down below, by default `{user_bal}` and `{user_bank}` is equal __0__`.
+> the `converter class` option object, The object allow to set bank and balance value to whatever You want and which will allow You to use `{user_bal}` and `{user_bank}` by default `{user_bal}` and `{user_bank}` is equal __0__`.
 
 

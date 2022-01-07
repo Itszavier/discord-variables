@@ -1,4 +1,4 @@
-import Discord, { GuildMember, Options, PartialGuildMember } from "discord.js"
+import Discord, { GuildMember, PartialGuildMember } from "discord.js"
 import moment from "moment"
 import { variables } from "./variables";
 
@@ -7,7 +7,10 @@ interface converterOptions {
     balance?: number,
 }
 
-
+const predefinedObject: converterOptions = {
+    balance: 0,
+    bank: 0
+}
 interface variable {
     name?: string,
     description?: string,
@@ -15,12 +18,12 @@ interface variable {
 }
 class converter {
     public text: string;
-    public options: converterOptions;
+    public options: converterOptions | null;
     private variables: Array<variable> = variables;
 
-    constructor(text: string, Options: converterOptions) {
+    constructor(text: string, Options?: converterOptions) {
         this.text = text;
-        this.options = Options;
+        this.options = Options || null;
 
     }
 
@@ -31,7 +34,9 @@ class converter {
 
     parseOnJoin(member: Discord.GuildMember): string {
         if (!member) { new Error("GuildMember Object is missing") }
-
+        if (this.options == null) {
+            this.options = predefinedObject;
+        }
         const balance = this.options.balance || 0
         const bank = this.options.bank || 0
 
@@ -59,6 +64,9 @@ class converter {
 
     parseOnMessage(message: Discord.Message<boolean>) {
         if (!message) (new Error("the discord message object was not found"))
+        if (this.options == null) {
+            this.options = predefinedObject;
+        }
         const balance = this.options.balance || 0
         const bank = this.options.bank || 0
 
@@ -88,6 +96,9 @@ class converter {
 
     parseOnMemberRemove(member: GuildMember | PartialGuildMember) {
         if (!member) { new Error("GuildMember Object is missing") }
+        if (this.options == null) {
+            this.options = predefinedObject;
+        }
         const balance = this.options.balance || 0
         const bank = this.options.bank || 0
 
