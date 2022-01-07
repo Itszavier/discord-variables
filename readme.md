@@ -1,36 +1,26 @@
 ## discord-variable 
 
-> more events support and documentation coming soon
-
-
+> more events support coming soon
 ```js
-const { Client, Intents } = require('discord.js')
-
-const { converter } = require("./lib/index")
-
-const intents = new Intents(32767)
-
-const compiler = new converter()
-
-
-const client = new Client({
-    intents: intents,
-})
-
-client.on("ready", bot => console.log('ready'))
-
 client.on("messageCreate", message => {
-    // logs out username with tag looks something like this foo#8909
-    console.log(compiler.parseOnMessage('{user_tag}', message))
-})
+    // You can also get your data from a database
+    const parser = new converter("You have {user_bal} in your wallet and {user_bank} in your", {
+        bank: 100,
+        balance: 200,
+    })
 
-client.on('guildMemberAdd', member => {
-    // mention the user
-    console.log(compiler.parseOnJoin('{user}', member))
-})
 
-client.login("your token")
+    console.log(parser.parseOnMessage(message))
+    // output: You have 200 in your wallet
+})
 ```
+
+
+## converter.getVariables()
+
+> `converter.getVariables()` return an Array of Objects containing all the variables
+
+
 
 ## variables
 
@@ -46,12 +36,13 @@ client.login("your token")
 | {user_createdAt}| createdAt in a readable date and time `M/D/Y h:m`    |
 | {server_icon}  | placeholder for the server icon returns the server icon|
 | {server_id}    | the server id                                          |
-| {server_owner} | `@mention` the server owner                              |
+| {server_owner} | `@mention` the server owner                            |
 |server_owner_id} |  the server owner id 
 |{server_memberCount} | the amount of members in the server  |
 |{channel_id}    | return the channel id this only works on ` parseOnMessage`|
+| {server_name} | return the server name  |
 
-# functions
+# methods
 
 
 |           Title              |                Description               |
@@ -61,3 +52,9 @@ client.login("your token")
 | `parseOnMessage` | Parse text in the `messageCreate` Event and need the message parameter __in order to work__|
 | `parseOnMemberRemove` | Parse text in the `guildMemberRemove` Event and need the member parameter __in order to work__| 
 | `getVariables`  | return a string array of all the variables            |
+
+## converter class Options
+
+> the `converter class` option object, The object allow to set bank and balance value to whatever You want and which will allow You to use `{user_bal}` and `{user_bank}` example down below, by default `{user_bal}` and `{user_bank}` is equal __0__`.
+
+

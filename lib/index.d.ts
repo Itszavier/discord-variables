@@ -3,16 +3,20 @@ interface converterOptions {
     bank?: number;
     balance?: number;
 }
+interface variable {
+    name?: string;
+    description?: string;
+    category?: string;
+}
 declare class converter {
     text: string;
-    balance: number;
-    bank: number;
+    options: converterOptions;
     private variables;
-    constructor(text: string, options: converterOptions);
-    getVariables(): string[];
+    constructor(text: string, Options: converterOptions);
+    getVariables(): Array<variable>;
     parseOnJoin(member: Discord.GuildMember): string;
     parseOnMessage(message: Discord.Message<boolean>): string;
-    parseOnMemberRemove(member: GuildMember | PartialGuildMember): this;
+    parseOnMemberRemove(member: GuildMember | PartialGuildMember): string;
 }
 declare const _default: {
     converter: typeof converter;
