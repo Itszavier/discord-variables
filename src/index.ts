@@ -2,21 +2,23 @@ import Discord, { GuildMember, PartialGuildMember } from "discord.js"
 import moment from "moment"
 import { variables } from "./variables";
 
-interface converterOptions {
+export interface converterOptions {
     bank?: number,
     balance?: number,
 }
 
+export type TextParameter = string | undefined
+
 const predefinedObject: converterOptions = {
     balance: 0,
-    bank: 0
+    bank: 0,
 }
-interface variable {
+export interface variable {
     name?: string,
     description?: string,
     category?: string
 }
-class converter {
+export class converter {
     public text: string;
     public options: converterOptions | null;
     private variables: Array<variable> = variables;
@@ -32,10 +34,13 @@ class converter {
     }
 
 
-    parseOnJoin(member: Discord.GuildMember): string {
+    parseOnJoin(member: Discord.GuildMember, text?: TextParameter): string {
         if (!member) { new Error("GuildMember Object is missing") }
         if (this.options == null) {
             this.options = predefinedObject;
+        }
+        if (text != undefined || text != null) {
+            this.text = text;
         }
         const balance = this.options.balance || 0
         const bank = this.options.bank || 0
@@ -43,6 +48,7 @@ class converter {
         const msg = this.text
             .replace(new RegExp("{user}", "gm"), `<@!${member.id}>`)
             .replace(new RegExp("{username}", "gm"), member.user.username)
+            .replace(new RegExp("{user_avatar}", 'gm'), member.user.displayAvatarURL())
             .replace(new RegExp("{user_tag}", "gm"), `${member.user.username}#${member.user.discriminator}`)
             .replace(new RegExp("{user_discrim}", "gm"), member.user.discriminator)
             .replace(new RegExp("{user_id}", 'gm'), member.id)
@@ -62,10 +68,13 @@ class converter {
         return msg;
     }
 
-    parseOnMessage(message: Discord.Message<boolean>) {
+    parseOnMessage(message: Discord.Message<boolean>, text: TextParameter) {
         if (!message) (new Error("the discord message object was not found"))
         if (this.options == null) {
             this.options = predefinedObject;
+        }
+        if (text != undefined || text != null) {
+            this.text = text;
         }
         const balance = this.options.balance || 0
         const bank = this.options.bank || 0
@@ -76,7 +85,7 @@ class converter {
             .replace(new RegExp("{user_tag}", "gm"), `${message.author.username} #${message.author.discriminator} `)
             .replace(new RegExp("{user_discrim}", "gm"), message.author.discriminator)
             .replace(new RegExp("{user_id}", 'gm'), message.author.id)
-            .replace(new RegExp("{user_avatar}", 'gm'), message.author.avatar || message.author.defaultAvatarURL)
+            .replace(new RegExp("{user_avatar}", 'gm'), message.author.avatarURL() || message.author.defaultAvatarURL)
             .replace(new RegExp("{user_nick}", "gm"), message.author.username)
             .replace(new RegExp("{user_createdAt}", "gm"), moment(message.author.createdAt).format("MMMM Do YYYY, h:mm"))
             .replace(new RegExp("{user_joinAt}", "gm"), moment(message.guild?.joinedAt).format("MMMM Do YYYY, h:mm"))
@@ -94,10 +103,14 @@ class converter {
     }
 
 
-    parseOnMemberRemove(member: GuildMember | PartialGuildMember) {
+    parseOnMemberRemove(member: GuildMember | PartialGuildMember, text: TextParameter) {
         if (!member) { new Error("GuildMember Object is missing") }
         if (this.options == null) {
             this.options = predefinedObject;
+        }
+
+        if (text != undefined || text != null) {
+            this.text = text;
         }
         const balance = this.options.balance || 0
         const bank = this.options.bank || 0
@@ -128,5 +141,3 @@ class converter {
 
 
 
-
-export = { converter }
