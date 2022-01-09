@@ -2,8 +2,6 @@
 
 > more events support coming soon
 
-discord-variable allows you to create a variable that can be used in discord.js events.
-
 
 
 
