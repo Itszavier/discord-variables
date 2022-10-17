@@ -1,6 +1,9 @@
 ## discord-variable 
 
-> more events support coming soon
+# new version being worked on;
+
+
+> this package is being recreated from the ground up with features allowing you to create variables for your project
 
 
 
