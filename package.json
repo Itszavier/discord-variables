@@ -5,12 +5,13 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "test": "node index.test.js"
+    "test": "ts-node ./src/test.ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "discord.js": "^13.5.0"
+    "discord.js": "^13.5.0",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "moment": "^2.29.1"
