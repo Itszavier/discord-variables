@@ -1,4 +1,5 @@
-import { IRule, Rules } from "./rule";
+import { GuildMember, PartialGuildMember, Message, Guild } from "discord.js";
+import { IRule, Rules, EventType, DefinitonReturnType } from "./rule";
 
 export class Converter {
   private rule: Rules;
@@ -11,11 +12,18 @@ export class Converter {
     }
   }
 
-  parseOnMessage(event: any, text: string) {
+  private parseEvent(
+    eventType: keyof typeof EventType,
+    event: any,
+    text: string,
+  ) {
     const array = text.trim().split(" ");
-    const rules = this.rule.rules.filter((rule) => rule.type === "message");
+    const rules = this.rule.rules.filter(
+      (rule) =>
+        rule.eventType === eventType || rule.eventType.includes(eventType),
+    );
 
-    const newArray: (string | number | undefined)[] = [];
+    const newArray: DefinitonReturnType[] = [];
 
     for (const rule of rules) {
       let matchFound = false;
@@ -28,15 +36,38 @@ export class Converter {
       });
 
       if (matchFound) {
-        break; // Exit loop if match found
+        break;
       }
     }
 
-    // Fill in the newArray with the original values if no rule matches
     array.forEach((value, index) => {
       newArray[index] = newArray[index] || value;
     });
 
     return newArray.join(" ");
+  }
+
+  parseOnMessage(event: Message, text: string) {
+    if (!(event instanceof Message))
+      throw new Error("event must be an instance of Discord Message");
+    return this.parseEvent("message", event, text);
+  }
+
+  parseOnMemberJoin(event: GuildMember, text: string) {
+    if (!(event instanceof GuildMember))
+      throw new Error("event must be an instance of Discord GuildMember");
+    return this.parseEvent("memberJoin", event, text);
+  }
+
+  parseOnMemberLeave(event: GuildMember | PartialGuildMember, text: string) {
+    if (!(event instanceof GuildMember))
+      throw new Error("event must be an instance of Discord GuildMember");
+    return this.parseEvent("memberLeave", event, text);
+  }
+
+  parseOnBotJoin(event: Guild, text: string) {
+    if (!(event instanceof Guild))
+      throw new Error("event must be an instance of Discord Guild");
+    return this.parseEvent("botJoin", event, text);
   }
 }

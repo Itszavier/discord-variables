@@ -1,9 +1,31 @@
-import Discord, { GuildMember, PartialGuildMember } from "discord.js";
+import Discord, {
+  ColorResolvable,
+  GuildMember,
+  Message,
+  PartialGuildMember,
+} from "discord.js";
 
+export enum EventType {
+  message,
+  memberJoin,
+  memberLeave,
+  botJoin,
+}
+
+export type EventsShortHand = keyof typeof EventType;
+
+export type DefinitonReturnType =
+  | string
+  | number
+  | ColorResolvable
+  | GuildMember
+  | PartialGuildMember;
+
+// Define the IRule interface
 export interface IRule {
   identifier: string;
-  type: string;
-  definition: (e: any) => string | number;
+  eventType: EventsShortHand | EventsShortHand[];
+  definition: (e: any) => DefinitonReturnType;
 }
 
 export class Rules {
@@ -13,6 +35,3 @@ export class Rules {
     this.rules = rules;
   }
 }
-
-
-
