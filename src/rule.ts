@@ -7,6 +7,7 @@ import Discord, {
 
 export enum EventType {
   message,
+  interactionCreate,
   memberJoin,
   memberLeave,
   botJoin,

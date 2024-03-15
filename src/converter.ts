@@ -1,4 +1,11 @@
-import { GuildMember, PartialGuildMember, Message, Guild } from "discord.js";
+import {
+  GuildMember,
+  PartialGuildMember,
+  Message,
+  Guild,
+  Interaction,
+  ButtonInteraction,
+} from "discord.js";
 import { IRule, Rules, EventType, DefinitonReturnType } from "./rule";
 
 export class Converter {
@@ -15,12 +22,12 @@ export class Converter {
   private parseEvent(
     eventType: keyof typeof EventType,
     event: any,
-    text: string,
+    text: string
   ) {
     const array = text.trim().split(" ");
     const rules = this.rule.rules.filter(
       (rule) =>
-        rule.eventType === eventType || rule.eventType.includes(eventType),
+        rule.eventType === eventType || rule.eventType.includes(eventType)
     );
 
     const newArray: DefinitonReturnType[] = [];
@@ -51,6 +58,10 @@ export class Converter {
     if (!(event instanceof Message))
       throw new Error("event must be an instance of Discord Message");
     return this.parseEvent("message", event, text);
+  }
+
+  parseInteractionCreate(event: any, text: string) {
+    return this.parseEvent("interactionCreate", event, text);
   }
 
   parseOnMemberJoin(event: GuildMember, text: string) {

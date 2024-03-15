@@ -1,11 +1,11 @@
 {
   "name": "discordjs-variables",
-  "version": "1.1.7",
-  "description": "allow You to use variables like this {user_tag} in Discord channels",
+  "version": "2.0.0",
+  "description": "create custom variables for your discord bot, allow users to customize their welcome messages",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "test": "ts-node ./src/test.ts"
+    "test": "ts-node ./src/index.test.ts"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,8 @@
     "discord variables",
     "discord variable parser",
     "discordjs",
-    "discord.js variables"
+    "discord.js variables",
+    "custom messages",
+    "custom welcome meessages"
   ]
 }
