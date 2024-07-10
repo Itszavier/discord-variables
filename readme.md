@@ -22,7 +22,8 @@ These enhancements streamline the development process, allowing you to focus on 
 
 1. [Installation](#installation)
 2. [Usage](#usage)
-3. [Change Logs](#change-logs)
+3. [Explanation](#explanation)
+4. [Change Logs](#change-logs)
 
 ---
 
