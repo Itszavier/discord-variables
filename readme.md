@@ -2,8 +2,6 @@
 
 <center><img align='center' style='margin: auto; width: 90%;' src='/assets/github-header-image (1).png' alt='image'/></center>
 
-To create a better documentation with more details for `discordjs-variables`, you can structure it as follows:
-
 ---
 
 ## discordjs-variables
