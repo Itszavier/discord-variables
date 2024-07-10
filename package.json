@@ -1,19 +1,19 @@
 {
   "name": "discordjs-variables",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "create custom variables for your discord bot, allow users to customize their welcome messages",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
     "test": "ts-node ./src/index.test.ts"
   },
-  "author": "",
+  "author": "Imani Brown",
   "license": "ISC",
   "devDependencies": {
-    "discord.js": "^13.5.0",
     "ts-node": "^10.9.2"
   },
   "dependencies": {
+    "discord.js": "^14.15.3",
     "moment": "^2.29.1"
   },
   "keywords": [
@@ -23,5 +23,16 @@
     "discord.js variables",
     "custom messages",
     "custom welcome meessages"
-  ]
+  ],
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Itszavier/discord-variables.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Itszavier/discord-variables/issues"
+  },
+  "homepage": "https://github.com/Itszavier/discord-variables#readme"
 }

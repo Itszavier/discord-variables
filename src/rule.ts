@@ -1,38 +1,34 @@
+/** @format */
+
 import Discord, {
   ColorResolvable,
   GuildMember,
   Message,
   PartialGuildMember,
 } from "discord.js";
-
-export enum EventType {
-  message,
-  interactionCreate,
-  memberJoin,
-  memberLeave,
-  botJoin,
-}
-
-export type EventsShortHand = keyof typeof EventType;
-
-export type DefinitonReturnType =
-  | string
-  | number
-  | ColorResolvable
-  | GuildMember
-  | PartialGuildMember;
+import { EventTypes } from "./types";
 
 // Define the IRule interface
-export interface IRule {
+export interface IRule<T extends keyof EventTypes> {
   identifier: string;
-  eventType: EventsShortHand | EventsShortHand[];
-  definition: (e: any) => DefinitonReturnType;
+  event: T;
+  definition: EventTypes[T];
 }
 
 export class Rules {
-  rules: IRule[];
+  rules: any;
 
-  constructor(rules: IRule[]) {
+  constructor(rules: any[]) {
     this.rules = rules;
   }
+}
+
+export class RulesCollection<T extends keyof EventTypes> {
+  rules: IRule<T>[];
+
+  constructor(rules: IRule<T>[]) {
+    this.rules = rules;
+  }
+
+  
 }

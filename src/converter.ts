@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   GuildMember,
   PartialGuildMember,
@@ -5,32 +7,107 @@ import {
   Guild,
   Interaction,
   ButtonInteraction,
+  Client,
+  GuildBan,
+  ContextMenuCommandAssertions,
+  Collection,
 } from "discord.js";
-import { IRule, Rules, EventType, DefinitonReturnType } from "./rule";
+import { IRule, Rules, RulesCollection } from "./rule";
+import { EventShortHand, EventTypes } from "./types";
 
-export class Converter {
-  private rule: Rules;
+export class Converter<T extends keyof EventTypes> {
+  config: { collection: RulesCollection<T> };
 
-  constructor(rules: Rules) {
-    if (rules instanceof Rules) {
-      this.rule = rules;
-    } else {
-      throw new Error("Rules must be an intanceof Rules class");
+  constructor(config: { collection: RulesCollection<T> }) {
+    if (!config || !config.collection) {
+      throw new Error(
+        "Please specify the rules collection or leave it as an empty array."
+      );
     }
+
+    this.config = config;
   }
 
-  private parseEvent(
-    eventType: keyof typeof EventType,
-    event: any,
-    text: string
-  ) {
+  /* parseMessage(event: Message, text: string) {
+    if (!(event instanceof Message))
+      throw new Error("event must be an instance of Discord Message");
+    return this.parseEvent("message", event, text);
+  }
+
+  parseInteractionCreate(event: any, text: string) {
+    return this.parseEvent("interactionCreate", event, text);
+  }*/
+
+  /*parseMemberJoin(event: GuildMember, text: string) {
+    if (!(event instanceof GuildMember))
+      throw new Error("event must be an instance of Discord GuildMember");
+    return this.parseEvent("memberJoin", event, text);
+  }
+
+  parseMemberLeave(event: GuildMember | PartialGuildMember, text: string) {
+    if (!(event instanceof GuildMember)) {
+      throw new Error("event must be an instance of Discord GuildMember");
+    }
+
+    return this.parseEvent("memberLeave", event, text);
+  }
+
+  parseBotJoin(event: Guild, text: string) {
+    if (!(event instanceof Guild)) {
+      throw new Error("event must be an instance of Discord Guild");
+    }
+    return this.parseEvent("botJoin", event, text);
+  }
+
+  parseBan(event: Guild, text: string) {
+    if (!(event instanceof GuildBan)) {
+      throw new Error("event must be an instance of Discord Guild");
+    }
+    return this.parseEvent("memberBan", event, text);
+  }
+
+
+
+  parseBanRemove(event: Guild, text: string) {
+    if (!(event instanceof GuildBan)) {
+      throw new Error("event must be an instance of Discord Guild");
+    }
+    return this.parseEvent("memberBanRemove", event, text);
+  }
+
+  */
+
+  parse<T extends keyof EventTypes>(text: string, eventType: T, ...args: any[]) {
+    if (!eventType || text) {
+      return;
+    }
+    const config = this.config;
+    const rules = config.collection.rules;
+
+    const currentRule = rules.find((rule) => {
+      return (rule.event as string) === (eventType as string);
+    });
+
+    if (!currentRule) {
+      return text;
+    }
+
+    const identifier = currentRule.identifier;
+    const returnType = currentRule.definition(args as any); // You need to pass the correct event here
+
+    const regex = new RegExp(identifier, "g");
+    const replacedText = text.replaceAll(regex, returnType);
+
+    return replacedText;
+  }
+
+  /*private parseEvent(eventType: EventShortHand, event: any, text: string) {
     const array = text.trim().split(" ");
     const rules = this.rule.rules.filter(
-      (rule) =>
-        rule.eventType === eventType || rule.eventType.includes(eventType)
+      (rule) => rule.event === eventType || rule.event.includes(eventType)
     );
 
-    const newArray: DefinitonReturnType[] = [];
+    const newArray: string[] = [];
 
     for (const rule of rules) {
       let matchFound = false;
@@ -52,33 +129,19 @@ export class Converter {
     });
 
     return newArray.join(" ");
-  }
-
-  parseOnMessage(event: Message, text: string) {
-    if (!(event instanceof Message))
-      throw new Error("event must be an instance of Discord Message");
-    return this.parseEvent("message", event, text);
-  }
-
-  parseInteractionCreate(event: any, text: string) {
-    return this.parseEvent("interactionCreate", event, text);
-  }
-
-  parseOnMemberJoin(event: GuildMember, text: string) {
-    if (!(event instanceof GuildMember))
-      throw new Error("event must be an instance of Discord GuildMember");
-    return this.parseEvent("memberJoin", event, text);
-  }
-
-  parseOnMemberLeave(event: GuildMember | PartialGuildMember, text: string) {
-    if (!(event instanceof GuildMember))
-      throw new Error("event must be an instance of Discord GuildMember");
-    return this.parseEvent("memberLeave", event, text);
-  }
-
-  parseOnBotJoin(event: Guild, text: string) {
-    if (!(event instanceof Guild))
-      throw new Error("event must be an instance of Discord Guild");
-    return this.parseEvent("botJoin", event, text);
-  }
+  }*/
 }
+
+const bot = new Client({ intents: ["GuildInvites", "Guilds"] });
+
+const converter = new Converter({
+  collection: new RulesCollection([
+    {
+      identifier: "{username}",
+      event: "banAdded",
+      definition: (ban) => {},
+    },
+  ]),
+});
+
+
