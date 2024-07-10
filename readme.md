@@ -111,8 +111,15 @@ bot.login("your token");
 - **`RuleStore`:** Stores and manages `Rule` objects, facilitating efficient organization and manipulation of transformation rules.
 
 - **`Transformer`:** Parses messages using defined `RuleStore` instances, replacing placeholders with actual values as per configured rules.
+```ts
+transformer.parse(text, "eventType", eventObject);
+```
+## Eamples
+advanced...
 
-This format provides a clear and concise overview of each function's purpose, parameters, and return values, making it easier to understand their roles within Discord bot development using `discordjs-variables`.
+```ts
+transformer.parse(text, "eventType", eventObject1, eventObject2, etc...);
+```
 
 ### Change Logs
 
