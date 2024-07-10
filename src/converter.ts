@@ -1,17 +1,5 @@
 /** @format */
 
-import {
-  GuildMember,
-  PartialGuildMember,
-  Message,
-  Guild,
-  Interaction,
-  ButtonInteraction,
-  Client,
-  GuildBan,
-  ContextMenuCommandAssertions,
-  Collection,
-} from "discord.js";
 import { IRule, RuleStore } from "./ruleStore";
 import { EventShortHand, EventTypes } from "./types";
 

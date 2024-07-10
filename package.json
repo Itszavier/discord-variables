@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/Itszavier/discord-variables#readme",
   "devDependencies": {
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
   }
 }
