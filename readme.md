@@ -72,7 +72,7 @@ bot.on("messageCreate", (message) => {
 // Log in to Discord
 bot.login("your token");
 ```
-
+# Explanation
 ### `createRule(identifier: string, event: keyof EventTypes, handler: Function): Rule`
 
 - **Purpose:** Creates a transformation rule for replacing placeholders in Discord bot messages.
