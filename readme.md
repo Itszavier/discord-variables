@@ -8,7 +8,7 @@
 
 Streamline Discord bot development with `discordjs-variables`, a powerful npm module built on Discord.js. Easily create dynamic Discord variables and enhance bot interactions effortlessly. Perfect for developers looking to simplify Discord bot programming while adding exciting new features.
 
-### Version 4.0.0
+### Version 3.0.0
 
 The `discordjs-variables` package has been significantly enhanced to support a broader range of Discord.js events with improved syntax, making it even easier for developers to integrate into their production-grade applications. Key improvements include:
 
