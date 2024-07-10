@@ -12,7 +12,6 @@ import {
 import { Converter } from "./converter";
 const bot = new Client({ intents: ["GuildInvites", "Guilds"] });
 
-
 export interface EventTypes {
   interactionCreate: (interaction: Interaction) => any;
   messageDelete: (message: Message | PartialMessage) => any;
@@ -21,6 +20,7 @@ export interface EventTypes {
   memberLeave: (Member: GuildMember) => any;
   banRemove: (ban: GuildBan) => any;
   banAdded: (ban: GuildBan) => any;
+  test: (...events: any) => any;
 }
 
 export interface Rule<T extends keyof EventTypes> {

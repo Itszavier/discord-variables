@@ -77,8 +77,12 @@ export class Converter<T extends keyof EventTypes> {
 
   */
 
-  parse<T extends keyof EventTypes>(text: string, eventType: T, ...args: any[]) {
-    if (!eventType || text) {
+  parse<T extends keyof EventTypes>(
+    text: string,
+    eventType: T,
+    ...args: Parameters<any>
+  ) {
+    if (!eventType || !text) {
       return;
     }
     const config = this.config;
@@ -93,10 +97,12 @@ export class Converter<T extends keyof EventTypes> {
     }
 
     const identifier = currentRule.identifier;
-    const returnType = currentRule.definition(args as any); // You need to pass the correct event here
 
+    const boundDefinition = currentRule.definition.bind(null, ...args);
+    const returnValue = boundDefinition(); // You need to pass the correct event here
+    console.log(returnValue);
     const regex = new RegExp(identifier, "g");
-    const replacedText = text.replaceAll(regex, returnType);
+    const replacedText = text.replaceAll(regex, returnValue);
 
     return replacedText;
   }
@@ -143,5 +149,3 @@ const converter = new Converter({
     },
   ]),
 });
-
-

@@ -9,9 +9,6 @@
   },
   "author": "Imani Brown",
   "license": "ISC",
-  "devDependencies": {
-    "ts-node": "^10.9.2"
-  },
   "dependencies": {
     "discord.js": "^14.15.3",
     "moment": "^2.29.1"
@@ -34,5 +31,8 @@
   "bugs": {
     "url": "https://github.com/Itszavier/discord-variables/issues"
   },
-  "homepage": "https://github.com/Itszavier/discord-variables#readme"
+  "homepage": "https://github.com/Itszavier/discord-variables#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  }
 }
