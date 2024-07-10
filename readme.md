@@ -27,8 +27,6 @@ To install the necessary dependencies, run the following command:
 npm i discordjs-variables
 ```
 
-with the new version 3 its pretty simple to use with more features and events added check out [change logs](#change logs) to see a comparson
-
 ## Usage
 
 ```js
