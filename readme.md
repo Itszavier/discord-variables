@@ -1,6 +1,6 @@
 <!-- @format -->
 
-<center><img align='center' style='margin: auto; width: 90%; padding: 10px;' src='/assets/github-header-image (1).png' alt='image'/></center>
+<center><img align='center' style='margin: auto; width: 90%; padding: 10px; margin-bottom: 20px;' src='/assets/github-header-image (1).png' alt='image'/></center>
 
 Streamline Discord bot development with discordjs-variables, a powerful npm module built on Discord.js. Easily create dynamic Discord variables and enhance bot interactions effortlessly. Perfect for developers looking to simplify Discord bot programming while adding exciting new features.
 
