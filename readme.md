@@ -2,37 +2,49 @@
 
 <center><img align='center' style='margin: auto; width: 90%;' src='/assets/github-header-image (1).png' alt='image'/></center>
 
-Streamline Discord bot development with discordjs-variables, a powerful npm module built on Discord.js. Easily create dynamic Discord variables and enhance bot interactions effortlessly. Perfect for developers looking to simplify Discord bot programming while adding exciting new features.
+To create a better documentation with more details for `discordjs-variables`, you can structure it as follows:
 
-**version 4.0.0**:
-The `discordjs-variables` package has been significantly enhanced to support a broader range of Discord.js events with improved syntax, making it even easier for developers to integrate it into their production-grade applications. Key improvements include:
+---
 
-- **Expanded Event Support**: Almost all Discord.js events are now supported, providing comprehensive coverage for various use cases.
-- **Simplified Syntax**: The syntax has been refined to include type support, enabling faster development and reducing potential errors.
-- **Unified Parse Function**: A single, powerful parse function simplifies event handling and ensures a consistent approach across your application.
+## discordjs-variables
 
-These enhancements are designed to streamline the development process, allowing you to focus on building robust and scalable Discord bots with minimal friction.
+Streamline Discord bot development with `discordjs-variables`, a powerful npm module built on Discord.js. Easily create dynamic Discord variables and enhance bot interactions effortlessly. Perfect for developers looking to simplify Discord bot programming while adding exciting new features.
 
-## Table of Contents
+### Version 4.0.0
 
-- [Installation](#installation)
+The `discordjs-variables` package has been significantly enhanced to support a broader range of Discord.js events with improved syntax, making it even easier for developers to integrate into their production-grade applications. Key improvements include:
 
-- [Usage](#usage)
+- **Expanded Event Support:** Almost all Discord.js events are now supported, providing comprehensive coverage for various use cases.
+- **Simplified Syntax:** The syntax has been refined to include type support, enabling faster development and reducing potential errors.
+- **Unified Parse Function:** A single, powerful parse function simplifies event handling and ensures a consistent approach across your application.
 
-## Installation
+These enhancements streamline the development process, allowing you to focus on building robust and scalable Discord bots with minimal friction.
 
-To install the necessary dependencies, run the following command:
+### Table of Contents
 
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Change Logs](#change-logs)
+
+---
+
+### Installation
+
+To install `discordjs-variables` and its dependencies, run the following command:
+
+```bash
+npm install discordjs-variables
 ```
-npm i discordjs-variables
-```
 
-## Usage
+### Usage
 
-```js
-const { Transformer, createRule, RuleStore }= require("discordjs-variables"); |
-import { Client } from "discord.js";
+#### Example Setup
 
+```javascript
+const { Transformer, createRule, RuleStore } = require("discordjs-variables");
+const { Client } = require("discord.js");
+
+// Define rules
 const rules = new RuleStore([
   createRule("{username}", "messageCreate", (message) => {
     return message.author.id;
@@ -43,31 +55,32 @@ const rules = new RuleStore([
   }),
 ]);
 
+// Initialize Discord client
 const bot = new Client({ intents: ["MessageContent", "Guilds", "GuildMessages"] });
 
-// initlize the transformer class with the rules of dynamic variables
+// Initialize Transformer with rules
 const transformer = new Transformer({ collection: [rules] });
 
+// Handle messageCreate event
 bot.on("messageCreate", (message) => {
-  if (!message.author.bot) {
-    return;
-  }
+  if (message.author.bot) return;
 
   const content = message.content;
   const parsedContent = transformer.parse(content, "messageCreate", message);
 
-  message.channel.send({ content: parsedContent });
-
-  /**
-   * @john23: name {username},
-   * bot: name @john23
-   * */
+  message.channel.send(parsedContent);
 });
 
+// Log in to Discord
 bot.login("your token");
-
 ```
 
-## changeLogs
+### Change Logs
 
-- latest version of `discordjs` version 14.15.3
+**Latest Version:** discordjs version 14.15.3
+
+For detailed changes and updates, refer to the [change logs](#change-logs).
+
+---
+
+This structured documentation provides clear instructions on installation, usage examples, and where to find further details about recent changes in the package. Adjust and expand on this template based on specific features and additional information relevant to `discordjs-variables` and its integration with Discord.js.
