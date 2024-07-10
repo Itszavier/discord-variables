@@ -14,7 +14,7 @@ const collection = new RulesCollection([
   },
 
   {
-    identifier: "{username}",
+    identifier: "{color}",
     event: "test",
     definition: (event1) => {
       console.log("definition function", event1, event2);
@@ -28,6 +28,6 @@ const converter = new Converter({ collection });
 const event1 = { first: "imani", color: "red" };
 const event2 = { last: "brown" };
 
-const results = converter.parse("hello world {username}", "test", event1, event2);
+const results = converter.parse("hello world {username} {color}", "test", event1, event2);
 
 console.log("index.test.ts:", results);

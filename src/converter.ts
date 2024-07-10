@@ -96,15 +96,24 @@ export class Converter<T extends keyof EventTypes> {
       return text;
     }
 
-    const identifier = currentRule.identifier;
+    const filteredRules = rules.filter(
+      (rule) => (rule.event as string) === (eventType as string)
+    );
 
-    const boundDefinition = currentRule.definition.bind(null, ...args);
-    const returnValue = boundDefinition(); // You need to pass the correct event here
-    console.log(returnValue);
-    const regex = new RegExp(identifier, "g");
-    const replacedText = text.replaceAll(regex, returnValue);
+    // Replace identifiers for each rule
+    filteredRules.forEach((rule) => {
+      const identifier = rule.identifier;
 
-    return replacedText;
+      // Bind args to definition function
+      const boundDefinition = rule.definition.bind(null, ...args);
+      const returnValue = boundDefinition();
+
+      // Replace identifiers in text with returnValue
+      const regex = new RegExp(identifier, "g");
+      text = text.replaceAll(regex, returnValue);
+    });
+
+    return text;
   }
 
   /*private parseEvent(eventType: EventShortHand, event: any, text: string) {
