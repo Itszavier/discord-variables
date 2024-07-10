@@ -9,4 +9,3 @@ export declare class Transformer<T extends keyof EventTypes> {
     define(ruleStore: RuleStore<T> | RuleStore<T>[] | IRule<T> | IRule<T>[]): void;
     parse<T extends keyof EventTypes>(text: string, eventType: T, ...args: Parameters<any>): string;
 }
-//# sourceMappingURL=transformer.d.ts.map

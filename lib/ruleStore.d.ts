@@ -9,4 +9,3 @@ export declare class RuleStore<T extends keyof EventTypes> {
     rules: IRule<T>[];
     constructor(rules: any[]);
 }
-//# sourceMappingURL=ruleStore.d.ts.map

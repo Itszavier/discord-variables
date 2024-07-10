@@ -24,4 +24,3 @@ export interface EventTypes extends channelEvents, guildEvents, messageEvents {
 export type DefinitionFunction<T extends keyof EventTypes> = EventTypes[T];
 export type EventShortHand = EventTypes;
 export {};
-//# sourceMappingURL=types.d.ts.map
