@@ -73,6 +73,46 @@ bot.on("messageCreate", (message) => {
 bot.login("your token");
 ```
 
+### `createRule(identifier: string, event: keyof EventTypes, handler: Function): Rule`
+
+- **Purpose:** Creates a transformation rule for replacing placeholders in Discord bot messages.
+- **Parameters:**
+  - `identifier`: Placeholder identifier (e.g., `{username}`).
+  - `event`: Discord.js event type (e.g., `"messageCreate"`).
+  - `handler`: Function handling the event to return the replacement value.
+- **Returns:** A `Rule` object defining the transformation rule.
+
+---
+
+### `RuleStore(rules: Rule[]): RuleStore`
+
+- **Purpose:** Manages multiple transformation rules for Discord bot messages.
+- **Parameters:**
+  - `rules`: Array of `Rule` objects.
+- **Returns:** A `RuleStore` instance for organizing and applying rules.
+
+---
+
+### `Transformer(options: TransformerOptions): Transformer`
+
+- **Purpose:** Parses Discord bot messages and applies transformation rules.
+- **Parameters:**
+  - `options`: Configuration options for initializing the Transformer.
+    - `collection`: Array of `RuleStore` instances containing rules.
+- **Returns:** A `Transformer` instance configured with specified rules.
+
+---
+
+**Explanation:**
+
+- **`createRule`:** Defines how placeholders in Discord messages (`identifier`) are replaced based on Discord events (`event`). A handler function (`handler`) processes events to determine replacement values.
+
+- **`RuleStore`:** Stores and manages `Rule` objects, facilitating efficient organization and manipulation of transformation rules.
+
+- **`Transformer`:** Parses messages using defined `RuleStore` instances, replacing placeholders with actual values as per configured rules.
+
+This format provides a clear and concise overview of each function's purpose, parameters, and return values, making it easier to understand their roles within Discord bot development using `discordjs-variables`.
+
 ### Change Logs
 
 **Latest Version:** discordjs version 14.15.3
