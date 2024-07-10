@@ -9,7 +9,7 @@ import {
   Message,
   PartialMessage,
 } from "discord.js";
-import { Converter } from "./converter";
+
 const bot = new Client({ intents: ["GuildInvites", "Guilds"] });
 
 export interface EventTypes {
@@ -20,7 +20,7 @@ export interface EventTypes {
   memberLeave: (Member: GuildMember) => any;
   banRemove: (ban: GuildBan) => any;
   banAdded: (ban: GuildBan) => any;
-  test: (...events: any) => any;
+  test: (event: any) => any;
 }
 
 export interface Rule<T extends keyof EventTypes> {

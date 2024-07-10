@@ -15,20 +15,10 @@ export interface IRule<T extends keyof EventTypes> {
   definition: EventTypes[T];
 }
 
-export class Rules {
-  rules: any;
-
-  constructor(rules: any[]) {
-    this.rules = rules;
-  }
-}
-
-export class RulesCollection<T extends keyof EventTypes> {
+export class RuleStore<T extends keyof EventTypes> {
   rules: IRule<T>[];
 
   constructor(rules: IRule<T>[]) {
     this.rules = rules;
   }
-
-  
 }

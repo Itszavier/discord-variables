@@ -1,33 +1,42 @@
 /** @format */
 
-import { Converter } from "./converter";
-import { RulesCollection } from "./rule";
+import { Transformer } from "./converter";
+import { createRule } from "./helper";
+import { RuleStore } from "./ruleStore";
 
-const collection = new RulesCollection([
-  {
-    identifier: "{username}",
-    event: "test",
-    definition: (event1, event2) => {
-      console.log("definition function", event1, event2);
-      return `name:${event1.first}-${event2.last}`;
-    },
-  },
+const rules = new RuleStore([
+  createRule("{username}", "test", function (e) {
+    return e.username;
+  }),
 
-  {
-    identifier: "{color}",
-    event: "test",
-    definition: (event1) => {
-      console.log("definition function", event1, event2);
-      return `${event1.color}`;
-    },
-  },
+  createRule("{name}", "test", function (e) {
+    return e.name;
+  }),
 ]);
 
-const converter = new Converter({ collection });
+const text = `
+Hello {name},
 
-const event1 = { first: "imani", color: "red" };
-const event2 = { last: "brown" };
+Welcome to our community! We're excited to have you join us.
 
-const results = converter.parse("hello world {username} {color}", "test", event1, event2);
+Your username is {username}. Please enjoy your stay!
 
-console.log("index.test.ts:", results);
+Message deleted by {name} at {time}.
+Please contact support if you have any questions.
+
+Interaction: {buttonId} clicked by {name}.
+Thank you for your interaction.
+
+Have a great day!
+`;
+
+const event = {
+  name: "imani brown",
+  username: "@bob",
+};
+
+const parser = new Transformer({
+  collection: rules,
+});
+
+console.log(parser.parse(text, "test", event));
