@@ -111,10 +111,11 @@ bot.login("your token");
 - **`RuleStore`:** Stores and manages `Rule` objects, facilitating efficient organization and manipulation of transformation rules.
 
 - **`Transformer`:** Parses messages using defined `RuleStore` instances, replacing placeholders with actual values as per configured rules.
+
+## Eamples
 ```ts
 transformer.parse(text, "eventType", eventObject);
 ```
-## Eamples
 advanced...
 
 ```ts
