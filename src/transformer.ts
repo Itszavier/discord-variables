@@ -6,7 +6,7 @@ import { EventShortHand, EventTypes } from "./types";
 export class Transformer<T extends keyof EventTypes> {
   private rulesMap: Map<T, IRule<T>[]>;
 
-  constructor(config: { collection: RuleStore<T> }) {
+  constructor(config: { collection: RuleStore<T> | RuleStore<T>[] }) {
     if (!config || !config.collection) {
       throw new Error(
         "Please specify the rules collection or leave it as an empty array."

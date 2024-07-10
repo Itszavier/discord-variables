@@ -1,82 +1,75 @@
 <!-- @format -->
 
-# introduction
+<center><img align='center' style='margin: auto; width: 90%;' src='/assets/github-header-image (1).png' alt='image'/></center>
 
-**discordjs-variables** is a package that makes it super easy to create custom variables for your discord bot.
+Streamline Discord bot development with discordjs-variables, a powerful npm module built on Discord.js. Easily create dynamic Discord variables and enhance bot interactions effortlessly. Perfect for developers looking to simplify Discord bot programming while adding exciting new features.
 
-If you don't know what I am talking about view the images below for examples.
+**version 4.0.0**:
+The `discordjs-variables` package has been significantly enhanced to support a broader range of Discord.js events with improved syntax, making it even easier for developers to integrate it into their production-grade applications. Key improvements include:
 
-This package is built on top of `discord.js` so only use this if your bot is using the `discord.js` framework .
+- **Expanded Event Support**: Almost all Discord.js events are now supported, providing comprehensive coverage for various use cases.
+- **Simplified Syntax**: The syntax has been refined to include type support, enabling faster development and reducing potential errors.
+- **Unified Parse Function**: A single, powerful parse function simplifies event handling and ensures a consistent approach across your application.
 
-```bash
-npm install discordjs-variables
+These enhancements are designed to streamline the development process, allowing you to focus on building robust and scalable Discord bots with minimal friction.
+
+## Table of Contents
+
+- [Installation](#installation)
+
+- [Usage](#usage)
+
+## Installation
+
+To install the necessary dependencies, run the following command:
+
+```
+npm i discordjs-variables
 ```
 
-install discord.js
+with the new version 3 its pretty simple to use with more features and events added check out [change logs](#change logs) to see a comparson
 
-```bash
-npm install discord.js
-```
+## Usage
 
-## How To use
+```js
+const { Transformer, createRule, RuleStore }= require("discordjs-variables"); |
+import { Client } from "discord.js";
 
-Create a `converter` are `rule` file to store the converter object and the rules for your custom variables
+const rules = new RuleStore([
+  createRule("{username}", "messageCreate", (message) => {
+    return message.author.id;
+  }),
 
-```ts
-import {Converter, Rules} from "discordjs-variables"
+  createRule("{name}", "messageCreate", (message) => {
+    return message.author.displayName;
+  }),
+]);
 
-// create new variables here
-const rules = new Rules([
-  {
-    identifier: "{username}",
-    eventType: "message",
-    definition: (e) => e.user.username;
+const bot = new Client({ intents: ["MessageContent", "Guilds", "GuildMessages"] });
+
+// initlize the transformer class with the rules of dynamic variables
+const transformer = new Transformer({ collection: [rules] });
+
+bot.on("messageCreate", (message) => {
+  if (!message.author.bot) {
+    return;
   }
-])
 
-// initialize your converter then pass your variables down
-const converter = new Converter(rules);
+  const content = message.content;
+  const parsedContent = transformer.parse(content, "messageCreate", message);
 
-// export it
-export default converter
-```
+  message.channel.send({ content: parsedContent });
 
-Then, integrate it into your project how you use it is up to you
-
-```ts
-import { Client, GatewayIntentBits } from "discord.js";
-import converter from "./converter.js"; // imports the converter
-
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
-client.on("messageCreate", async (message) => {
-  message.reply(
-    converter.parseOnMessage(message, "{username}, you just send a message ")
-  ); // JackWilder, you just send a message
+  /**
+   * @john23: name {username},
+   * bot: name @john23
+   * */
 });
 
-client.login(TOKEN);
+bot.login("your token");
+
 ```
 
-# Rules class
-
-The Rules class gives you the ability to create custom discord variables, The . `Rules` class takes an **Array** of **objects** as **param**, Each containing the following keys
-
-| Key          | Description                                                                                                                                          | Type                |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------- |
-| `identifier` | This is the `variable` name, The parser will search a string then replace the identifier with the return value of `definition` function              | `string`            |
-| `eventType`  | The Discord Client event the variable is meant for. Note you can only use the parser associated with the event type to parse it                      | `EventShortHand`    |
-| `definition` | Allows you to add meaning to the identifier, what ever the return value of this function is it will replace the identifier that is found in a string | `(e: any) => string | number` |
-
-## Converter Methods
-
-The `converter` class contains methods with different ways to parse a string based on a `discord.js` client event. _(Am working on a single parse method)_
-
-| **Method**            | **Description**                            | **Type**                                       |
-| --------------------- | ------------------------------------------ | ---------------------------------------------- |
-| `parseOnMessage()`    | Parse strings in the `messageCreate` event | `(event: Message, text: string) => string`     |
-| `parseOnMemberJoin()` | Parse strings in the `messageCreate` event | `(event: GuildMember, text: string) => string` |
-
-## change logs
+## changeLogs
 
 - latest version of `discordjs` version 14.15.3

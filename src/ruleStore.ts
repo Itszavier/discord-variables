@@ -1,11 +1,5 @@
 /** @format */
 
-import Discord, {
-  ColorResolvable,
-  GuildMember,
-  Message,
-  PartialGuildMember,
-} from "discord.js";
 import { EventTypes } from "./types";
 
 // Define the IRule interface
@@ -18,7 +12,7 @@ export interface IRule<T extends keyof EventTypes> {
 export class RuleStore<T extends keyof EventTypes> {
   rules: IRule<T>[];
 
-  constructor(rules: IRule<T>[]) {
+  constructor(rules: any[]) {
     this.rules = rules;
   }
 }

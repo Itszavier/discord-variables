@@ -1,6 +1,6 @@
 /** @format */
 
 export * from "./ruleStore";
-export * from "./converter";
+export * from "./transformer";
 export * from "./types";
 export * from "./helper";
