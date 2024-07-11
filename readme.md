@@ -1,7 +1,7 @@
 <!-- @format -->
 <center><img align='center' style='margin: auto; width: 90%;' src='/assets/github-header-image (1).png' alt='image'/></center>
 
----
+
 
 ## discordjs-variables
 
@@ -194,4 +194,3 @@ For more detailed information on the changes, visit the [changelog on GitHub](ht
 
 For more details and advanced usage, please refer to the [GitHub repository](https://github.com/Itszavier/discord-variables).
 
----
