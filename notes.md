@@ -1,0 +1,1 @@
+headings (`###` for versions and `####` for changes), you create a clear separation between different versions and the changes they include. This format is easy to read and navigate, allowing users to quickly find the information relevant to the version they are interested in.

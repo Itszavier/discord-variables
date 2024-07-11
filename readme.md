@@ -1,5 +1,4 @@
 <!-- @format -->
-
 <center><img align='center' style='margin: auto; width: 90%;' src='/assets/github-header-image (1).png' alt='image'/></center>
 
 ---
@@ -18,16 +17,22 @@ The `discordjs-variables` package has been significantly enhanced to support a b
 
 These enhancements streamline the development process, allowing you to focus on building robust and scalable Discord bots with minimal friction.
 
-### Table of Contents
+---
+
+## Table of Contents
 
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [Explanation](#explanation)
-4. [Change Logs](#change-logs)
+4. [Examples](#examples)
+   - [RuleStore](#rulestore)
+   - [Transformer](#transformer)
+5. [Change Logs](#change-logs)
+6. [Further Information](#further-information)
 
 ---
 
-### Installation
+## Installation
 
 To install `discordjs-variables` and its dependencies, run the following command:
 
@@ -35,9 +40,11 @@ To install `discordjs-variables` and its dependencies, run the following command
 npm install discordjs-variables
 ```
 
-### Usage
+---
 
-#### Example Setup
+## Usage
+
+### Example Setup
 
 ```javascript
 const { Transformer, createRule, RuleStore } = require("discordjs-variables");
@@ -73,7 +80,11 @@ bot.on("messageCreate", (message) => {
 // Log in to Discord
 bot.login("your token");
 ```
-# Explanation
+
+---
+
+## Explanation
+
 ### `createRule(identifier: string, event: keyof EventTypes, handler: Function): Rule`
 
 - **Purpose:** Creates a transformation rule for replacing placeholders in Discord bot messages.
@@ -104,30 +115,84 @@ bot.login("your token");
 
 ---
 
-**Explanation:**
+## Examples
 
-- **`createRule`:** Defines how placeholders in Discord messages (`identifier`) are replaced based on Discord events (`event`). A handler function (`handler`) processes events to determine replacement values.
+### RuleStore
 
-- **`RuleStore`:** Stores and manages `Rule` objects, facilitating efficient organization and manipulation of transformation rules.
+The `RuleStore` class was created to offer the ability to organize all of your rules for your dynamic Discord variables. It offers types to some extent. However, when you add more rules of different types, you may lose all TypeScript types and encounter errors. To solve this problem, the `createRule` helper function was created.
 
-- **`Transformer`:** Parses messages using defined `RuleStore` instances, replacing placeholders with actual values as per configured rules.
+Example without `createRule`:
 
-## Eamples
 ```ts
-transformer.parse(text, "eventType", eventObject);
+const rules = new RuleStore([
+  {
+    identifier: "{username}",
+    event: "interactionCreate",
+    definition: (interaction) => {
+      return interaction.member?.user.username;
+    },
+  },
+]);
 ```
-advanced...
+
+Example with `createRule` to maintain TypeScript types:
+
+```ts
+const rules = new RuleStore([
+  createRule("{username}", "interactionCreate", (interaction) => {
+    return interaction.member?.user.username;
+  }),
+]);
+```
+
+---
+
+### Transformer
+
+The `Transformer` does exactly what it sounds like: it contains methods for parsing strings. This class is responsible for parsing variables efficiently and effectively.
+
+```ts
+const transformer = new Transformer({
+  collection: new RuleStore([]),
+});
+```
+
+or...
+
+```ts
+const transformer = new Transformer({
+  collection: [new RuleStore([]), new RuleStore([])],
+});
+```
+
+To parse a string:
+
+```ts
+transformer.parse("[string to parse]", "[The Event type]", eventObject);
+```
+
+For more complex parsing:
 
 ```ts
 transformer.parse(text, "eventType", eventObject1, eventObject2, etc...);
 ```
 
-### Change Logs
-
-**Latest Version:** discordjs version 14.15.3
-
-For detailed changes and updates, refer to the [change logs](#change-logs).
+> Unlike in version 2, where the package was not fully stable or completed, the parser in the current version now uses regex to handle string parsing behind the scenes. This ensures it will always match an identifier, no matter how complex it is within the string.
 
 ---
 
-This structured documentation provides clear instructions on installation, usage examples, and where to find further details about recent changes in the package. Adjust and expand on this template based on specific features and additional information relevant to `discordjs-variables` and its integration with Discord.js.
+## Change Logs
+
+### Latest Version: discordjs-variables v3.0.0
+
+In version 3, the `Converter` class was removed and replaced by the `Transformer` class to make the package more scalable. The previous `Converter` class had all the event parsers defined as methods, which was hard to manage. The new `Transformer` class features a powerful single parsing method, streamlining the parsing process and enhancing maintainability.
+
+For more detailed information on the changes, visit the [changelog on GitHub](https://github.com/Itszavier/discord-variables/blob/main/CHANGELOG.md).
+
+---
+
+## Further Information
+
+For more details and advanced usage, please refer to the [GitHub repository](https://github.com/Itszavier/discord-variables).
+
+---

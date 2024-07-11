@@ -1,6 +1,6 @@
 <!-- @format -->
 
-Separating versions in a changelog can be done using clear headings and consistent formatting. Each version should have its own section, with the version number and release date clearly marked. Here's an example following the Keep a Changelog format:
+
 
 ### Changelog
 
@@ -16,10 +16,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Introduced the `Transformer` class to replace the `Converter` class for improved scalability.
 - Added a powerful single parsing method in the `Transformer` class.
+- Added the `ruleStore` class also for creating rules offer types to some extent
+- Added the `createRule` helper function to offer typescript types 
 
 #### Removed
 
 - Removed the `Converter` class.
+- Removed the `Rules` class
 
 #### Improved
 
@@ -36,4 +39,3 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 #### Added
 
 - Basic functionality for handling events with simple parsing methods.
-

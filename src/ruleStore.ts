@@ -12,7 +12,7 @@ export interface IRule<T extends keyof EventTypes> {
 export class RuleStore<T extends keyof EventTypes> {
   rules: IRule<T>[];
 
-  constructor(rules: any[]) {
+  constructor(rules: IRule<T>[]) {
     this.rules = rules;
   }
 }
