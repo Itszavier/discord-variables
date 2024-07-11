@@ -1,10 +1,4 @@
 <!-- @format -->
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> db7708a82494c3d6c05b05d3df9fbdff9927102f
 ### Changelog
 
 All notable changes to this project will be documented in this file.
