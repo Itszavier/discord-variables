@@ -1,9 +1,24 @@
-<!-- @format -->
-<center><img align='center' style='margin: auto; width: 90%;' src='/assets/github-header-image (1).png' alt='image'/></center>
+<div align="center">
+  <img height="" src="https://i.ibb.co/nw2z4cx/github-header-image-1.png"  />
+</div>
 
+###
 
+<div align="center">
+  <a href="https://discord.gg/hUG9b85MJb" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="discord logo"  />
+  </a>
+  <a href="https://ko-fi.com/imanibrown" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Support&logo=ko-fi&label=&color=F16061&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="ko-fi logo"  />
+  </a>
+</div>
 
-## discordjs-variables
+###
+
+<h1 align="center">Create Dynamic Discord Variables With Ease</h1>
+
+###
+
 
 Streamline Discord bot development with `discordjs-variables`, a powerful npm module built on Discord.js. Easily create dynamic Discord variables and enhance bot interactions effortlessly. Perfect for developers looking to simplify Discord bot programming while adding exciting new features.
 
