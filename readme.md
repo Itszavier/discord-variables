@@ -1,9 +1,24 @@
-<!-- @format -->
-<center><img align='center' style='margin: auto; width: 90%;' src='/assets/github-header-image (1).png' alt='image'/></center>
+<div align="center">
+  <img height="" src="https://i.ibb.co/nw2z4cx/github-header-image-1.png"  />
+</div>
 
----
+###
 
-## discordjs-variables
+<div align="center">
+  <a href="https://discord.gg/hUG9b85MJb" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="discord logo"  />
+  </a>
+  <a href="https://ko-fi.com/imanibrown" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Support&logo=ko-fi&label=&color=F16061&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="ko-fi logo"  />
+  </a>
+</div>
+
+###
+
+<h1 align="center">Create Dynamic Discord Variables With Ease</h1>
+
+###
+
 
 Streamline Discord bot development with `discordjs-variables`, a powerful npm module built on Discord.js. Easily create dynamic Discord variables and enhance bot interactions effortlessly. Perfect for developers looking to simplify Discord bot programming while adding exciting new features.
 
@@ -17,7 +32,6 @@ The `discordjs-variables` package has been significantly enhanced to support a b
 
 These enhancements streamline the development process, allowing you to focus on building robust and scalable Discord bots with minimal friction.
 
----
 
 ## Table of Contents
 
@@ -30,7 +44,6 @@ These enhancements streamline the development process, allowing you to focus on 
 5. [Change Logs](#change-logs)
 6. [Further Information](#further-information)
 
----
 
 ## Installation
 
@@ -177,7 +190,7 @@ For more complex parsing:
 transformer.parse(text, "eventType", eventObject1, eventObject2, etc...);
 ```
 
-> Unlike in version 2, where the package was not fully stable or completed, the parser in the current version now uses regex to handle string parsing behind the scenes. This ensures it will always match an identifier, no matter how complex it is within the string.
+Unlike in version 2, where the package was not fully stable or completed, the parser in the current version now uses regex to handle string parsing behind the scenes. This ensures it will always match an identifier, no matter how complex it is within the string.
 
 ---
 
@@ -189,10 +202,8 @@ In version 3, the `Converter` class was removed and replaced by the `Transformer
 
 For more detailed information on the changes, visit the [changelog on GitHub](https://github.com/Itszavier/discord-variables/blob/main/CHANGELOG.md).
 
----
 
 ## Further Information
 
 For more details and advanced usage, please refer to the [GitHub repository](https://github.com/Itszavier/discord-variables).
 
----
