@@ -1,7 +1,5 @@
 <!-- @format -->
 
-Separating versions in a changelog can be done using clear headings and consistent formatting. Each version should have its own section, with the version number and release date clearly marked. Here's an example following the Keep a Changelog format:
-
 ### Changelog
 
 All notable changes to this project will be documented in this file.
