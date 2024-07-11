@@ -17,7 +17,6 @@ The `discordjs-variables` package has been significantly enhanced to support a b
 
 These enhancements streamline the development process, allowing you to focus on building robust and scalable Discord bots with minimal friction.
 
----
 
 ## Table of Contents
 
@@ -30,7 +29,6 @@ These enhancements streamline the development process, allowing you to focus on 
 5. [Change Logs](#change-logs)
 6. [Further Information](#further-information)
 
----
 
 ## Installation
 
