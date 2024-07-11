@@ -177,7 +177,7 @@ For more complex parsing:
 transformer.parse(text, "eventType", eventObject1, eventObject2, etc...);
 ```
 
-> Unlike in version 2, where the package was not fully stable or completed, the parser in the current version now uses regex to handle string parsing behind the scenes. This ensures it will always match an identifier, no matter how complex it is within the string.
+Unlike in version 2, where the package was not fully stable or completed, the parser in the current version now uses regex to handle string parsing behind the scenes. This ensures it will always match an identifier, no matter how complex it is within the string.
 
 ---
 
@@ -189,7 +189,6 @@ In version 3, the `Converter` class was removed and replaced by the `Transformer
 
 For more detailed information on the changes, visit the [changelog on GitHub](https://github.com/Itszavier/discord-variables/blob/main/CHANGELOG.md).
 
----
 
 ## Further Information
 
