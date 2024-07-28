@@ -11,7 +11,6 @@
     <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="discord logo"  />
   </a>
 
-
   <a href="https://ko-fi.com/imanibrown" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Support&logo=ko-fi&label=&color=F16061&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="ko-fi logo"  />
   </a>
@@ -29,7 +28,17 @@
 
 Streamline Discord bot development with `discordjs-variables`, a powerful npm module built on Discord.js. Easily create dynamic Discord variables and enhance bot interactions effortlessly. Perfect for developers looking to simplify Discord bot programming while adding exciting new features.
 
-### Version 3.0.0
+## Open source
+
+We welcome contributions from everyone!
+
+This package is fully open source, and we're excited to see how you can help make it even cooler.
+
+For information on how to get started, please refer to the [contributing guide](https://github.com/Itszavier/discord-variables/blob/main/CONTRIBUTING.md).
+
+Please adhere to our [code of conduct](https://github.com/Itszavier/discord-variables/blob/main/CODE_OF_CONDUCT.md) while contributing.
+
+## Version 3.0.0
 
 The `discordjs-variables` package has been significantly enhanced to support a broader range of Discord.js events with improved syntax, making it even easier for developers to integrate into their production-grade applications. Key improvements include:
 
@@ -50,6 +59,7 @@ These enhancements streamline the development process, allowing you to focus on 
 5. [Change Logs](#change-logs)
 6. [Further Information](#further-information)
 
+
 ## Installation
 
 To install `discordjs-variables` and its dependencies, run the following command:
@@ -58,7 +68,6 @@ To install `discordjs-variables` and its dependencies, run the following command
 npm install discordjs-variables
 ```
 
----
 
 ## Usage
 

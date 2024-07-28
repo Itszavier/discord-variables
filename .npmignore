@@ -1,5 +1,7 @@
 index.test.js
 ./index.test.js
-
+.github
+.vscode
 ./src/index.test.ts
 assets
+src
