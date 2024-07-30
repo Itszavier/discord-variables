@@ -108,7 +108,7 @@ bot.on("messageCreate", (message) => {
 bot.login("your token");
 ```
 
----
+
 
 ## Explanation
 
@@ -130,7 +130,6 @@ bot.login("your token");
   - `rules`: Array of `Rule` objects.
 - **Returns:** A `RuleStore` instance for organizing and applying rules.
 
----
 
 ### `Transformer(options: TransformerOptions): Transformer`
 
@@ -140,7 +139,7 @@ bot.login("your token");
     - `collection`: Array of `RuleStore` instances containing rules.
 - **Returns:** A `Transformer` instance configured with specified rules.
 
----
+
 
 ## Examples
 
@@ -172,7 +171,7 @@ const rules = new RuleStore([
 ]);
 ```
 
----
+
 
 ### Transformer
 
@@ -206,7 +205,6 @@ transformer.parse(text, "eventType", eventObject1, eventObject2, etc...);
 
 Unlike in version 2, where the package was not fully stable or completed, the parser in the current version now uses regex to handle string parsing behind the scenes. This ensures it will always match an identifier, no matter how complex it is within the string.
 
----
 
 ## Change Logs
 
