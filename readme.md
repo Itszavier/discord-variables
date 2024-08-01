@@ -1,4 +1,4 @@
-Discord Variables is an open-source npm package that makes it easy to create customizable messages for your Discord bot. With this tool, you can use placeholders like `{{username}}` to automatically insert things like the user's name or mention them in your bot's messages.
+Discord Variable is an open-source npm package that makes it easy to create customizable messages for your Discord bot. With this tool, you can use placeholders like `{{username}}` to automatically insert things like the user's name or mention them in your bot's messages.
 
 This lets users personalize how the bot talks, making it more fun and interactive. By giving users control over the bot's messages, you can make your bot more enjoyable and user-friendly.# installation
 
