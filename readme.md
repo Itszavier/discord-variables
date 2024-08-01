@@ -1,63 +1,6 @@
-<!-- @format -->
+Discord Variables is an open-source npm package that makes it easy to create customizable messages for your Discord bot. With this tool, you can use placeholders like `{{username}}` to automatically insert things like the user's name or mention them in your bot's messages.
 
-<div align="center">
-  <img height="" src="https://i.ibb.co/nw2z4cx/github-header-image-1.png"  />
-</div>
-
-###
-
-<div align="center">
-  <a href="https://discord.gg/hUG9b85MJb" target="_blank">
-    <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="discord logo"  />
-  </a>
-
-  <a href="https://ko-fi.com/imanibrown" target="_blank">
-    <img src="https://img.shields.io/static/v1?message=Support&logo=ko-fi&label=&color=F16061&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="ko-fi logo"  />
-  </a>
-  <a href="https://github.com/Itszavier">
-  <img src="https://img.shields.io/badge/GitHub-Profile-blue.svg" alt="GitHub Profile">
-  </a>
- 
-</div>
-
-###
-
-<h1 align="center">Create Dynamic Discord Variables With Ease</h1>
-
-###
-
-Streamline Discord bot development with `discordjs-variables`, a powerful npm module built on Discord.js. Easily create dynamic Discord variables and enhance bot interactions effortlessly. Perfect for developers looking to simplify Discord bot programming while adding exciting new features.
-
-## Open source
-
-We welcome contributions from everyone!
-
-This package is fully open source, and we're excited to see how you can help make it even cooler.
-
-For information on how to get started, please refer to the [contributing guide](https://github.com/Itszavier/discord-variables/blob/main/CONTRIBUTING.md).
-
-Please adhere to our [code of conduct](https://github.com/Itszavier/discord-variables/blob/main/CODE_OF_CONDUCT.md) while contributing.
-
-## Version 3.0.0
-
-The `discordjs-variables` package has been significantly enhanced to support a broader range of Discord.js events with improved syntax, making it even easier for developers to integrate into their production-grade applications. Key improvements include:
-
-- **Expanded Event Support:** Almost all Discord.js events are now supported, providing comprehensive coverage for various use cases.
-- **Simplified Syntax:** The syntax has been refined to include type support, enabling faster development and reducing potential errors.
-- **Unified Parse Function:** A single, powerful parse function simplifies event handling and ensures a consistent approach across your application.
-
-These enhancements streamline the development process, allowing you to focus on building robust and scalable Discord bots with minimal friction.
-
-## Table of Contents
-
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Explanation](#explanation)
-4. [Examples](#examples)
-   - [RuleStore](#rulestore)
-   - [Transformer](#transformer)
-5. [Change Logs](#change-logs)
-6. [Further Information](#further-information)
+This lets users personalize how the bot talks, making it more fun and interactive. By giving users control over the bot's messages, you can make your bot more enjoyable and user-friendly.# installation
 
 
 ## Installation
@@ -68,39 +11,43 @@ To install `discordjs-variables` and its dependencies, run the following command
 npm install discordjs-variables
 ```
 
+A simpler breakdown:
 
-## Usage
+### Code Simplified
 
-### Example Setup
-
-```javascript
+```js
 const { Transformer, createRule, RuleStore } = require("discordjs-variables");
-const { Client } = require("discord.js");
+const { Client, GatewayIntentBits } = require("discord.js");
 
-// Define rules
+// Define rules for replacing placeholders
 const rules = new RuleStore([
-  createRule("{username}", "messageCreate", (message) => {
-    return message.author.id;
-  }),
+  // Replace {username} with the author's ID
+  createRule("{username}", "messageCreate", (message) => message.author.id),
 
-  createRule("{name}", "messageCreate", (message) => {
-    return message.author.displayName;
-  }),
+  // Replace {name} with the author's display name
+  createRule("{name}", "messageCreate", (message) => message.author.displayName),
 ]);
 
-// Initialize Discord client
-const bot = new Client({ intents: ["MessageContent", "Guilds", "GuildMessages"] });
+// Create and set up the Discord client
+const bot = new Client({
+  intents: [
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+  ],
+});
 
-// Initialize Transformer with rules
+// Set up the Transformer with the rules
 const transformer = new Transformer({ collection: [rules] });
 
-// Handle messageCreate event
+// Handle new messages
 bot.on("messageCreate", (message) => {
-  if (message.author.bot) return;
+  if (message.author.bot) return; // Ignore bot messages
 
-  const content = message.content;
-  const parsedContent = transformer.parse(content, "messageCreate", message);
+  // Transform the message content
+  const parsedContent = transformer.parse(message.content, "messageCreate", message);
 
+  // Send the transformed message
   message.channel.send(parsedContent);
 });
 
@@ -108,112 +55,41 @@ bot.on("messageCreate", (message) => {
 bot.login("your token");
 ```
 
+### Examples
 
+1. **Original Message**:
+   ```
+   Hello, {username}!
+   ```
+   **Context**: User ID `1234567890`
 
-## Explanation
+   **Transformed Message**:
+   ```
+   Hello, 1234567890!
+   ```
 
-### `createRule(identifier: string, event: keyof EventTypes, handler: Function): Rule`
+2. **Original Message**:
+   ```
+   Hey {name}, welcome!
+   ```
+   **Context**: Display name `CoolUser`
 
-- **Purpose:** Creates a transformation rule for replacing placeholders in Discord bot messages.
-- **Parameters:**
-  - `identifier`: Placeholder identifier (e.g., `{username}`).
-  - `event`: Discord.js event type (e.g., `"messageCreate"`).
-  - `handler`: Function handling the event to return the replacement value.
-- **Returns:** A `Rule` object defining the transformation rule.
+   **Transformed Message**:
+   ```
+   Hey CoolUser, welcome!
+   ```
 
----
+### Explanation
 
-### `RuleStore(rules: Rule[]): RuleStore`
-
-- **Purpose:** Manages multiple transformation rules for Discord bot messages.
-- **Parameters:**
-  - `rules`: Array of `Rule` objects.
-- **Returns:** A `RuleStore` instance for organizing and applying rules.
-
-
-### `Transformer(options: TransformerOptions): Transformer`
-
-- **Purpose:** Parses Discord bot messages and applies transformation rules.
-- **Parameters:**
-  - `options`: Configuration options for initializing the Transformer.
-    - `collection`: Array of `RuleStore` instances containing rules.
-- **Returns:** A `Transformer` instance configured with specified rules.
-
-
-
-## Examples
-
-### RuleStore
-
-The `RuleStore` class was created to offer the ability to organize all of your rules for your dynamic Discord variables. It offers types to some extent. However, when you add more rules of different types, you may lose all TypeScript types and encounter errors. To solve this problem, the `createRule` helper function was created.
-
-Example without `createRule`:
-
-```ts
-const rules = new RuleStore([
-  {
-    identifier: "{username}",
-    event: "interactionCreate",
-    definition: (interaction) => {
-      return interaction.member?.user.username;
-    },
-  },
-]);
-```
-
-Example with `createRule` to maintain TypeScript types:
-
-```ts
-const rules = new RuleStore([
-  createRule("{username}", "interactionCreate", (interaction) => {
-    return interaction.member?.user.username;
-  }),
-]);
-```
+- **Rules**: Define how to replace `{username}` and `{name}` with actual values.
+- **Transformer**: Applies these rules to the message content.
+- **Bot Behavior**: Listens for messages, transforms them, and sends the result back to the channel.
 
 
 
-### Transformer
 
-The `Transformer` does exactly what it sounds like: it contains methods for parsing strings. This class is responsible for parsing variables efficiently and effectively.
+> [!TIP]  
+> You can separate the the `RuleStore` class in a different file and export it if needed.
+## Documentation
 
-```ts
-const transformer = new Transformer({
-  collection: new RuleStore([]),
-});
-```
-
-or...
-
-```ts
-const transformer = new Transformer({
-  collection: [new RuleStore([]), new RuleStore([])],
-});
-```
-
-To parse a string:
-
-```ts
-transformer.parse("[string to parse]", "[The Event type]", eventObject);
-```
-
-For more complex parsing:
-
-```ts
-transformer.parse(text, "eventType", eventObject1, eventObject2, etc...);
-```
-
-Unlike in version 2, where the package was not fully stable or completed, the parser in the current version now uses regex to handle string parsing behind the scenes. This ensures it will always match an identifier, no matter how complex it is within the string.
-
-
-## Change Logs
-
-### Latest Version: discordjs-variables v3.0.0
-
-In version 3, the `Converter` class was removed and replaced by the `Transformer` class to make the package more scalable. The previous `Converter` class had all the event parsers defined as methods, which was hard to manage. The new `Transformer` class features a powerful single parsing method, streamlining the parsing process and enhancing maintainability.
-
-For more detailed information on the changes, visit the [changelog on GitHub](https://github.com/Itszavier/discord-variables/blob/main/CHANGELOG.md).
-
-## Further Information
-
-For more details and advanced usage, please refer to the [GitHub repository](https://github.com/Itszavier/discord-variables).
+Click [here](https://github.com/Itszavier/discord-variables/wiki/) for documentation
