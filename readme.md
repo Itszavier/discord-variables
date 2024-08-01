@@ -90,6 +90,8 @@ bot.login("your token");
 
 > [!TIP]  
 > You can separate the the `RuleStore` class in a different file and export it if needed.
+
 ## Documentation
 
-Click [here](https://github.com/Itszavier/discord-variables/wiki/) for documentation
+For comprehensive documentation and usage details, please visit our [GitHub Wiki](https://github.com/Itszavier/discord-variables/wiki/).
+
