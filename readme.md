@@ -86,11 +86,6 @@ bot.login("your token");
 - **Bot Behavior**: Listens for messages, transforms them, and sends the result back to the channel.
 
 
-
-
-> [!TIP]  
-> You can separate the the `RuleStore` class in a different file and export it if needed.
-
 ## Documentation
 
 For comprehensive documentation and usage details, please visit our [GitHub Wiki](https://github.com/Itszavier/discord-variables/wiki/).
